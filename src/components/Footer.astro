@@ -17,13 +17,18 @@ const socialIcons: Record<string, string> = {
     <div class="ft-inner">
       <div class="ft-top">
         <div class="ft-brand">
-          <div class="ft-logo-row">
+          <button class="ft-logo-row ft-brand-toggle" aria-expanded="false">
             <div class="ft-logo-icon">
               <div class="ft-logo-sq"></div>
             </div>
             <span class="ft-logo-name">{logo}</span>
+            <svg class="ft-brand-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4622A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="ft-tagline-wrap">
+            <p class="ft-tagline">{tagline}</p>
           </div>
-          <p class="ft-tagline">{tagline}</p>
         </div>
 
         <div class="ft-socials-block">
@@ -143,6 +148,14 @@ const socialIcons: Record<string, string> = {
       btn.classList.toggle('is-open', !expanded);
     });
   });
+
+  const brandToggle = document.querySelector('.ft-brand-toggle');
+  const taglineWrap = document.querySelector('.ft-tagline-wrap');
+  brandToggle?.addEventListener('click', () => {
+    const expanded = brandToggle.getAttribute('aria-expanded') === 'true';
+    brandToggle.setAttribute('aria-expanded', String(!expanded));
+    taglineWrap?.classList.toggle('is-open');
+  });
 </script>
 
 <style>
@@ -151,7 +164,7 @@ const socialIcons: Record<string, string> = {
   .ft-inner   { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
   /* ── White top band ── */
-  .ft-top-band { background: #fff; padding: 48px 0; }
+  .ft-top-band { background: #F4F7F2; padding: 48px 0; }
   .ft-top {
     display: flex;
     align-items: flex-start;
@@ -159,14 +172,28 @@ const socialIcons: Record<string, string> = {
     gap: 40px;
   }
   .ft-brand     { max-width: 460px; }
-  .ft-logo-row  { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .ft-logo-row  { display: flex; align-items: center; gap: 10px; }
+  .ft-brand-toggle {
+    background: none; border: none; padding: 0; cursor: pointer; font-family: inherit;
+  }
   .ft-logo-icon {
     width: 36px; height: 36px; border-radius: 10px; background: #FBEDE4;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .ft-logo-sq   { width: 14px; height: 14px; border: 2.5px solid #C4622A; border-radius: 3px; }
   .ft-logo-name { font-weight: 800; font-size: 20px; color: #C4622A; letter-spacing: -0.02em; }
-  .ft-tagline   { font-size: 14.5px; line-height: 1.65; color: #4A6655; }
+  .ft-brand-chevron { flex-shrink: 0; transition: transform 0.3s ease; }
+  .ft-brand-toggle[aria-expanded="true"] .ft-brand-chevron { transform: rotate(180deg); }
+  .ft-tagline-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+  }
+  .ft-tagline-wrap.is-open { grid-template-rows: 1fr; }
+  .ft-tagline {
+    font-size: 14.5px; line-height: 1.65; color: #4A6655; text-align: left;
+    overflow: hidden; padding-top: 16px;
+  }
 
   /* ── Socials ── */
   .ft-socials-block { flex-shrink: 0; text-align: right; }

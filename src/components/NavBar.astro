@@ -1,10 +1,25 @@
 ---
-// Contains static design text as found in your original template
+import data from '../data/nav.json';
+const { logo, links } = data;
+const navLinks = links.filter(l => l.label !== 'Contact Us');
+const contactLink = links.find(l => l.label === 'Contact Us');
+
+const itemIcons: Record<string, string> = {
+  'Become a Venue Partner': `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+  'Locations': `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  'Screen Advertising': `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+};
+
+const categoryIcons: Record<string, string> = {
+  'Foundational': `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+  'Lead Gen': `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+  'Branding & Awareness': `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>`,
+};
 ---
 
 <style is:global>
   /* ── Base (mobile-first) ── */
-  .sf-nav-links  { display: none; }
+  .sf-nav-links   { display: none; }
   .sf-nav-contact { display: none; }
 
   .sf-hamburger {
@@ -50,7 +65,7 @@
     transition: max-height 0.35s ease;
     z-index: 49;
   }
-  .sf-mobile-menu.is-open { max-height: 400px; }
+  .sf-mobile-menu.is-open { max-height: 600px; }
 
   .sf-mobile-menu-inner {
     padding: 12px 20px 24px;
@@ -79,10 +94,130 @@
     box-shadow: 0 4px 6px rgba(140,55,12,0.6);
     transition: background-color 0.2s ease, transform 0.2s ease !important;
   }
-  .sf-mobile-contact:hover {
-    background: #d8733d !important;
-    transform: scale(1.02) !important;
+  .sf-mobile-contact:hover { background: #d8733d !important; transform: scale(1.02) !important; }
+
+  /* ── Mobile sub-links ── */
+  .sf-mobile-sub { padding-left: 12px; }
+  .sf-mobile-sub a { font-size: 14px !important; color: #4A6655 !important; padding: 8px 12px !important; }
+
+  /* ── Desktop dropdown trigger ── */
+  .sf-nav-item { position: relative; }
+  .sf-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    color: #4A6655;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
   }
+  .sf-dropdown-trigger:hover { color: #C4622A; }
+  .sf-dropdown-trigger svg { transition: transform 0.25s ease; }
+  .sf-dropdown-trigger.is-open { color: #C4622A; }
+  .sf-dropdown-trigger.is-open svg { transform: rotate(180deg); }
+
+  /* ── Dropdown panel ── */
+  .sf-dropdown {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: #fff;
+    border: 1px solid #E2EADF;
+    border-radius: 18px;
+    box-shadow: 0 16px 48px rgba(26,51,37,0.14);
+    padding: 12px;
+    min-width: 280px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+  }
+  .sf-dropdown.is-open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ── Indoor Billboards dropdown items ── */
+  .sf-dd-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  .sf-dd-item:hover { background: #F4F7F2; }
+  .sf-dd-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #FBEDE4;
+    color: #C4622A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .sf-dd-item:hover .sf-dd-icon { background: #C4622A; color: #fff; }
+  .sf-dd-label { font-size: 14px; font-weight: 700; color: #1A3325; line-height: 1.3; }
+  .sf-dd-desc  { font-size: 12.5px; color: #4A6655; line-height: 1.45; margin-top: 2px; }
+
+  /* ── Solutions megamenu ── */
+  .sf-mega {
+    min-width: 540px;
+    left: auto;
+    right: auto;
+    transform: translateX(-40%) translateY(-8px);
+  }
+  .sf-mega.is-open { transform: translateX(-40%) translateY(0); }
+  .sf-mega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+  .sf-mega-col { padding: 8px 4px; }
+  .sf-mega-cat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #C4622A;
+    padding: 6px 10px;
+    margin-bottom: 4px;
+  }
+  .sf-mega-cat-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: #FBEDE4;
+    color: #C4622A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .sf-mega-link {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1A3325;
+    padding: 7px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .sf-mega-link:hover { background: #F4F7F2; color: #C4622A; }
 
   /* ── Tablet (768px+) ── */
   @media (min-width: 768px) {
@@ -104,7 +239,6 @@
   /* ── Shared ── */
   .sf-nav-link { transition: color 0.2s ease; }
   .sf-nav-link:hover { color: #C4622A !important; }
-
   .sf-contact-btn { transition: transform 0.2s ease, background-color 0.2s ease; }
   .sf-contact-btn:hover { transform: scale(1.06); background: #d8733d !important; }
 </style>
@@ -117,25 +251,65 @@
       <div style="width:34px;height:34px;border-radius:9px;background:#2D5A3D;display:flex;align-items:center;justify-content:center;flex-shrink:0">
         <div style="width:14px;height:14px;border:2.5px solid #F4F7F2;border-radius:3px"></div>
       </div>
-      <span style="font-weight:800;font-size:20px;color:#1A3325;letter-spacing:-0.02em;white-space:nowrap">Sharp Frame</span>
+      <span style="font-weight:800;font-size:20px;color:#1A3325;letter-spacing:-0.02em;white-space:nowrap">{logo}</span>
     </a>
 
     <!-- Desktop nav links -->
     <div class="sf-nav-links">
-      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">Home</a>
-      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">About Us</a>
-      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">Indoor Billboards</a>
-      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">Solutions</a>
+      {navLinks.map(l => (
+        l.dropdown ? (
+          <div class="sf-nav-item">
+            <button class="sf-dropdown-trigger" data-dropdown={l.label}>
+              {l.label}
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+
+            {/* Indoor Billboards dropdown */}
+            {l.label === 'Indoor Billboards' && (
+              <div class="sf-dropdown" data-panel={l.label}>
+                {l.dropdown.map((item: any) => (
+                  <a href={item.href} class="sf-dd-item">
+                    <div class="sf-dd-icon" set:html={itemIcons[item.label] ?? ''} />
+                    <div>
+                      <div class="sf-dd-label">{item.label}</div>
+                      <div class="sf-dd-desc">{item.description}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* Solutions megamenu */}
+            {l.label === 'Solutions' && (
+              <div class="sf-dropdown sf-mega" data-panel={l.label}>
+                <div class="sf-mega-grid">
+                  {l.dropdown.map((cat: any) => (
+                    <div class="sf-mega-col">
+                      <div class="sf-mega-cat">
+                        <span class="sf-mega-cat-icon" set:html={categoryIcons[cat.category] ?? ''} />
+                        {cat.category}
+                      </div>
+                      {cat.items.map((item: any) => (
+                        <a href={item.href} class="sf-mega-link">{item.label}</a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <a href={l.href ?? '#'} class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">{l.label}</a>
+        )
+      ))}
     </div>
 
     <!-- Desktop contact button -->
-    <a href="#" class="sf-contact-btn sf-nav-contact" style="background:#C4622A;color:#fff;font-weight:700;font-size:15px;padding:12px 24px;border-radius:999px;box-shadow:0 4px 6px rgba(140,55,12,0.6);white-space:nowrap">Contact Us</a>
+    <a href={contactLink?.href ?? '#'} class="sf-contact-btn sf-nav-contact" style="background:#C4622A;color:#fff;font-weight:700;font-size:15px;padding:12px 24px;border-radius:999px;box-shadow:0 4px 6px rgba(140,55,12,0.6);white-space:nowrap">{contactLink?.label}</a>
 
     <!-- Hamburger -->
     <button class="sf-hamburger" id="sf-hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
 
   </nav>
@@ -143,22 +317,64 @@
   <!-- Mobile menu -->
   <div class="sf-mobile-menu" id="sf-mobile-menu">
     <div class="sf-mobile-menu-inner">
-      <a href="#">Home</a>
-      <a href="#">About Us</a>
-      <a href="#">Indoor Billboards</a>
-      <a href="#">Solutions</a>
-      <a href="#" class="sf-mobile-contact">Contact Us</a>
+      {navLinks.map(l => (
+        l.dropdown ? (
+          <div>
+            <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#C4622A;padding:10px 12px 4px">{l.label}</div>
+            <div class="sf-mobile-sub">
+              {l.label === 'Indoor Billboards' && l.dropdown.map((item: any) => (
+                <a href={item.href}>{item.label}</a>
+              ))}
+              {l.label === 'Solutions' && l.dropdown.map((cat: any) =>
+                cat.items.map((item: any) => (
+                  <a href={item.href}>{item.label}</a>
+                ))
+              )}
+            </div>
+          </div>
+        ) : (
+          <a href={l.href ?? '#'}>{l.label}</a>
+        )
+      ))}
+      <a href={contactLink?.href ?? '#'} class="sf-mobile-contact">{contactLink?.label}</a>
     </div>
   </div>
 </header>
 
 <script>
+  // Hamburger
   const hamburger = document.getElementById('sf-hamburger');
   const mobileMenu = document.getElementById('sf-mobile-menu');
-
   hamburger?.addEventListener('click', () => {
     const isOpen = mobileMenu?.classList.toggle('is-open');
     hamburger.classList.toggle('is-open');
     hamburger.setAttribute('aria-expanded', String(!!isOpen));
   });
+
+  // Desktop dropdowns
+  const triggers = document.querySelectorAll<HTMLButtonElement>('.sf-dropdown-trigger');
+
+  const closeAll = () => {
+    triggers.forEach(t => {
+      t.classList.remove('is-open');
+      document.querySelector(`[data-panel="${t.dataset.dropdown}"]`)?.classList.remove('is-open');
+    });
+  };
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const label = trigger.dataset.dropdown!;
+      const panel = document.querySelector(`[data-panel="${label}"]`);
+      const isOpen = trigger.classList.contains('is-open');
+      closeAll();
+      if (!isOpen) {
+        trigger.classList.add('is-open');
+        panel?.classList.add('is-open');
+      }
+    });
+  });
+
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
 </script>

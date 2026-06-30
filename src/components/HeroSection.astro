@@ -1,5 +1,6 @@
 ---
-// Accepts custom metadata text properties if configured down the line
+import data from '../data/hero.json';
+const { eyebrow, headline, subheadline, cta } = data;
 ---
 
 <section class="sf-hero-section">
@@ -10,10 +11,10 @@
       class="sf-hero-img"
     />
     <div class="sf-hero-card">
-      <div class="sf-hero-eyebrow">Premium Marketing Solutions</div>
-      <h1 class="sf-hero-h1">Local Advertising &amp; Digital Marketing Pros in Denver</h1>
-      <p class="sf-hero-p">Helping businesses get noticed — on screens and online.</p>
-      <a href="#" class="hero-cta-btn sf-hero-btn">Talk to our team</a>
+      <div class="sf-hero-eyebrow">{eyebrow}</div>
+      <h1 class="sf-hero-h1">{headline}</h1>
+      <p class="sf-hero-p">{subheadline}</p>
+      <a href={cta.href} class="hero-cta-btn sf-hero-btn">{cta.label}</a>
     </div>
   </div>
 </section>
@@ -111,8 +112,8 @@
       left: 28px;
       right: auto;
       transform: none;
-      max-width: 380px;
-      padding: 24px 28px;
+      max-width: 480px;
+      padding: 20px 28px;
     }
 
     .sf-hero-eyebrow { font-size: 12px; margin-bottom: 10px; }
@@ -130,8 +131,8 @@
     .sf-hero-card {
       bottom: 40px;
       left: 48px;
-      max-width: 480px;
-      padding: 32px 36px;
+      max-width: 620px;
+      padding: 24px 36px;
     }
 
     .sf-hero-eyebrow { font-size: 13px; margin-bottom: 12px; }

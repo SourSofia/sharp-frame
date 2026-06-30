@@ -1,5 +1,6 @@
 ---
-// Static section matching your layout specs
+import data from '../data/cta.json';
+const { heading, body, cta } = data.final;
 ---
 <section class="ctab-section">
   <div class="ctab-bg-photo"></div>
@@ -8,9 +9,9 @@
     <div style="position:absolute;top:-60px;right:-40px;width:240px;height:240px;border-radius:999px;background:rgba(255,255,255,0.07)"></div>
     <div style="position:absolute;bottom:-80px;left:-50px;width:260px;height:260px;border-radius:999px;background:rgba(255,255,255,0.06)"></div>
     <div style="position:relative">
-      <h2 class="ctab-heading">Ready to Grow Your Business?</h2>
-      <p class="ctab-body">Get in touch with our team today and let's discuss how we can help you reach more customers.</p>
-      <a href="/contact-us" class="cta-banner-btn ctab-btn">Schedule Free Consultation</a>
+      <h2 class="ctab-heading">{heading}</h2>
+      <p class="ctab-body">{body}</p>
+      <a href={cta.href} class="cta-banner-btn ctab-btn">{cta.label}</a>
     </div>
   </div>
 </section>

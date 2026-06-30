@@ -1,5 +1,6 @@
 ---
-// Static section matching your layout specs
+import data from '../data/why-us.json';
+const { eyebrow, heading, body, cta } = data;
 ---
 <section class="wu-section" style="max-width:1200px;margin:0 auto;">
   <div style="position:relative;border-radius:24px;overflow:hidden">
@@ -11,11 +12,11 @@
     />
     <div class="wu-card" style="position:absolute;background:rgba(255,255,255,0.96);backdrop-filter:blur(6px);border-radius:20px;display:grid;align-items:center;box-shadow:0 24px 60px rgba(26,51,37,0.18)">
       <div>
-        <div class="wu-eyebrow">Your Trusted Denver Marketing Partners</div>
-        <h2 class="wu-heading">Why Denver Businesses Choose Our Marketing Pros</h2>
-        <a href="/contact-us" class="whyus-cta-btn">Get started today</a>
+        <div class="wu-eyebrow">{eyebrow}</div>
+        <h2 class="wu-heading">{heading}</h2>
+        <a href={cta.href} class="whyus-cta-btn">{cta.label}</a>
       </div>
-      <p class="wu-body">We're not just another agency. We're Denver marketing pros and locals who understand the market, know the neighborhoods, and have the relationships that get results. Our clients choose us because we deliver measurable outcomes, transparent reporting, and personalized service that treats your business like our own. From web design to PPC campaigns, we've got you covered.</p>
+      <p class="wu-body">{body}</p>
     </div>
   </div>
 </section>

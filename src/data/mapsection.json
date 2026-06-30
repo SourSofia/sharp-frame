@@ -9,10 +9,6 @@
     { "name": "Aurora" },
     { "name": "Arvada" },
     { "name": "Lakewood" },
-    { "name": "Centennial" },
-    { "name": "Highlands Ranch" },
-    { "name": "Westminster" },
-    { "name": "Englewood" },
-    { "name": "Thornton" }
+    { "name": "Centennial" }
   ]
 }

@@ -1,26 +1,24 @@
 ---
-// src/components/ScanModal.astro
-const perks = [
-  'Free 30-minute strategy session',
-  'Custom campaign recommendations',
-  'No commitment or pressure',
-];
+import data from '../data/scanmodal.json';
+import nav from '../data/nav.json';
+const { tagline, title, perks, badges, ctaHeading, ctaDescription, primaryBtnText, primaryBtnLink, dismissBtnText } = data;
+const brandName = nav.logo;
 ---
 
 <dialog id="scan-modal" class="modal-backdrop">
   <div class="modal-container">
-    
+
     <!-- ===== LEFT PANEL ===== -->
     <div class="left-panel">
       <div class="brand-row">
         <div class="brand-logo">
           <div class="inner-box"></div>
         </div>
-        <span class="brand-name">Sharp Frame</span>
+        <span class="brand-name">{brandName}</span>
       </div>
 
-      <div class="tagline">Limited Time Offer</div>
-      <h2 class="modal-title">Free Marketing Consultation</h2>
+      <div class="tagline">{tagline}</div>
+      <h2 class="modal-title">{title}</h2>
 
       <div class="perks-list">
         {perks.map((perk) => (
@@ -34,8 +32,9 @@ const perks = [
       </div>
 
       <div class="badge-row">
-        <span class="pill-badge">20+ Years</span>
-        <span class="pill-badge">Denver Experts</span>
+        {badges.map((badge) => (
+          <span class="pill-badge">{badge}</span>
+        ))}
       </div>
     </div>
 
@@ -45,13 +44,13 @@ const perks = [
         <img src="/images/home.avif" alt="Denver skyline" class="skyline-img" />
       </div>
 
-      <h3 class="cta-heading">Ready to Grow Your Business?</h3>
-      <p class="cta-description">Expert marketing strategies tailored for Denver businesses. Let's discuss how we can help you succeed.</p>
+      <h3 class="cta-heading">{ctaHeading}</h3>
+      <p class="cta-description">{ctaDescription}</p>
 
       <div class="action-footer">
-        <a href="/schedule" class="primary-btn">Schedule Free Consultation</a>
+        <a href={primaryBtnLink} class="primary-btn">{primaryBtnText}</a>
         <div class="dismiss-wrapper">
-          <button type="button" id="close-modal-link" class="dismiss-btn">No, thanks</button>
+          <button type="button" id="close-modal-link" class="dismiss-btn">{dismissBtnText}</button>
         </div>
       </div>
     </div>

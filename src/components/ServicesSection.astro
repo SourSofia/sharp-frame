@@ -1,14 +1,12 @@
 ---
-interface Props {
-  items: Array<{ title: string; description: string; href?: string }>;
-}
-const { items } = Astro.props;
+import data from '../data/services.json';
+const { heading, body, items } = data;
 ---
 <section class="svc-section" style="background:#2D5A3D;margin-top:80px;">
   <div style="max-width:1200px;margin:0 auto">
     <div class="svc-header" style="display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:end;margin-bottom:56px">
-      <h2 class="svc-heading" style="line-height:1.1;font-weight:800;color:#fff;letter-spacing:-0.02em">Local Advertising Solutions for Denver Businesses</h2>
-      <p class="svc-subtext" style="line-height:1.65;color:#cfe0d3">As your trusted Denver marketing pros, our billboard network gives you access to high-traffic locations where your ideal customers spend time. From gyms and restaurants to retail stores and office buildings, we help you get noticed in the moments that matter.</p>
+      <h2 class="svc-heading" style="line-height:1.1;font-weight:800;color:#fff;letter-spacing:-0.02em">{heading}</h2>
+      <p class="svc-subtext" style="line-height:1.65;color:#cfe0d3">{body}</p>
     </div>
     <div class="svc-cards-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
       {items.map((svc, i) => (

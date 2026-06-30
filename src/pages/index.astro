@@ -1,8 +1,6 @@
 ---
-import services from '../data/services.json';
 import venue from '../data/venue.json';
 import fullservice from '../data/fullservice.json';
-import faq from '../data/faq.json';
 
 import '../styles/global.css';
 
@@ -15,6 +13,7 @@ import FullService from '../components/FullServiceSection.astro';
 import WhyChooseUs from '../components/WhyUsSection.astro';
 import Faq from '../components/FaqSection.astro';
 import MapSection from '../components/MapSection.astro';
+import PartnerSection from '../components/PartnerSection.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Footer from '../components/Footer.astro';
 import FloatingCTA from '../components/FloatingCTA.astro';
@@ -45,7 +44,7 @@ import ScanModal from '../components/ScanModal.astro';
 
   <Hero />
 
-  <Services items={services.items} />
+  <Services />
 
   <VenuePartner 
     heading={venue.heading} 
@@ -64,7 +63,9 @@ import ScanModal from '../components/ScanModal.astro';
 
   <WhyChooseUs />
 
-  <Faq items={faq.items} />
+  <PartnerSection />
+
+  <Faq />
 
   <MapSection />
 
