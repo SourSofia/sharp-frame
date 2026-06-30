@@ -65,7 +65,7 @@ const categoryIcons: Record<string, string> = {
     transition: max-height 0.35s ease;
     z-index: 49;
   }
-  .sf-mobile-menu.is-open { max-height: 600px; }
+  .sf-mobile-menu.is-open { max-height: 80vh; overflow-y: auto; }
 
   .sf-mobile-menu-inner {
     padding: 12px 20px 24px;
@@ -96,9 +96,63 @@ const categoryIcons: Record<string, string> = {
   }
   .sf-mobile-contact:hover { background: #d8733d !important; transform: scale(1.02) !important; }
 
-  /* ── Mobile sub-links ── */
-  .sf-mobile-sub { padding-left: 12px; }
-  .sf-mobile-sub a { font-size: 14px !important; color: #4A6655 !important; padding: 8px 12px !important; }
+  /* ── Mobile sub-sections ── */
+  .sf-mobile-section {
+    background: none;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+  .sf-mobile-section-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4A6655;
+    padding: 12px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .sf-mobile-section-toggle:hover { background: #EBF1E9; color: #C4622A; }
+  .sf-mobile-section-chevron { transition: transform 0.25s ease; flex-shrink: 0; }
+  .sf-mobile-section-toggle[aria-expanded="true"] .sf-mobile-section-chevron { transform: rotate(180deg); }
+  .sf-mobile-section-toggle[aria-expanded="true"] { color: #C4622A; }
+
+  .sf-mobile-section-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+  .sf-mobile-section-body.is-open { grid-template-rows: 1fr; }
+  .sf-mobile-section-body > * { overflow: hidden; }
+
+  .sf-mobile-section a {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1A3325 !important;
+    padding: 10px 16px !important;
+    border-radius: 0 !important;
+    border-top: 1px solid #F4F7F2;
+  }
+  .sf-mobile-section a:hover { background: #F4F7F2 !important; color: #C4622A !important; }
+  .sf-mobile-cat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4A6655;
+    padding: 10px 16px 4px;
+    border-top: 1px solid #EBF1E9;
+  }
 
   /* ── Desktop dropdown trigger ── */
   .sf-nav-item { position: relative; }
@@ -319,17 +373,25 @@ const categoryIcons: Record<string, string> = {
     <div class="sf-mobile-menu-inner">
       {navLinks.map(l => (
         l.dropdown ? (
-          <div>
-            <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#C4622A;padding:10px 12px 4px">{l.label}</div>
-            <div class="sf-mobile-sub">
-              {l.label === 'Indoor Billboards' && l.dropdown.map((item: any) => (
-                <a href={item.href}>{item.label}</a>
-              ))}
-              {l.label === 'Solutions' && l.dropdown.map((cat: any) =>
-                cat.items.map((item: any) => (
+          <div class="sf-mobile-section">
+            <button class="sf-mobile-section-toggle" aria-expanded="false">
+              {l.label}
+              <svg class="sf-mobile-section-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="sf-mobile-section-body">
+              <div>
+                {l.label === 'Indoor Billboards' && l.dropdown.map((item: any) => (
                   <a href={item.href}>{item.label}</a>
-                ))
-              )}
+                ))}
+                {l.label === 'Solutions' && l.dropdown.map((cat: any) => (
+                  <>
+                    <div class="sf-mobile-cat-label">{cat.category}</div>
+                    {cat.items.map((item: any) => (
+                      <a href={item.href}>{item.label}</a>
+                    ))}
+                  </>
+                ))}
+              </div>
             </div>
           </div>
         ) : (
@@ -349,6 +411,16 @@ const categoryIcons: Record<string, string> = {
     const isOpen = mobileMenu?.classList.toggle('is-open');
     hamburger.classList.toggle('is-open');
     hamburger.setAttribute('aria-expanded', String(!!isOpen));
+  });
+
+  // Mobile section toggles (event delegation)
+  mobileMenu?.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest('.sf-mobile-section-toggle') as HTMLElement | null;
+    if (!btn) return;
+    e.stopPropagation();
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.nextElementSibling?.classList.toggle('is-open', !expanded);
   });
 
   // Desktop dropdowns
