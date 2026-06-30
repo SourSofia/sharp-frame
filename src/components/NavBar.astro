@@ -1,0 +1,164 @@
+---
+// Contains static design text as found in your original template
+---
+
+<style is:global>
+  /* ── Base (mobile-first) ── */
+  .sf-nav-links  { display: none; }
+  .sf-nav-contact { display: none; }
+
+  .sf-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+  }
+  .sf-hamburger:hover { background: rgba(45,90,61,0.08); }
+  .sf-hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #1A3325;
+    border-radius: 999px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .sf-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .sf-hamburger.is-open span:nth-child(2) { opacity: 0; }
+  .sf-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Mobile menu ── */
+  .sf-mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(244,247,242,0.98);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #E2EADF;
+    border-bottom: 1px solid #E2EADF;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    z-index: 49;
+  }
+  .sf-mobile-menu.is-open { max-height: 400px; }
+
+  .sf-mobile-menu-inner {
+    padding: 12px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sf-mobile-menu a {
+    font-weight: 600;
+    font-size: 16px;
+    color: #4A6655;
+    padding: 12px 12px;
+    border-radius: 10px;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .sf-mobile-menu a:hover { background: #EBF1E9; color: #C4622A !important; }
+  .sf-mobile-contact {
+    margin-top: 8px;
+    background: #C4622A;
+    color: #fff !important;
+    text-align: center;
+    padding: 13px 24px !important;
+    border-radius: 999px !important;
+    font-weight: 700;
+    box-shadow: 0 4px 6px rgba(140,55,12,0.6);
+    transition: background-color 0.2s ease, transform 0.2s ease !important;
+  }
+  .sf-mobile-contact:hover {
+    background: #d8733d !important;
+    transform: scale(1.02) !important;
+  }
+
+  /* ── Tablet (768px+) ── */
+  @media (min-width: 768px) {
+    .sf-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .sf-nav-contact { display: inline-block; }
+    .sf-hamburger   { display: none; }
+    .sf-mobile-menu { display: none !important; }
+  }
+
+  /* ── Desktop (1280px+) ── */
+  @media (min-width: 1280px) {
+    .sf-nav-links { gap: 36px; }
+  }
+
+  /* ── Shared ── */
+  .sf-nav-link { transition: color 0.2s ease; }
+  .sf-nav-link:hover { color: #C4622A !important; }
+
+  .sf-contact-btn { transition: transform 0.2s ease, background-color 0.2s ease; }
+  .sf-contact-btn:hover { transform: scale(1.06); background: #d8733d !important; }
+</style>
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(244,247,242,0.85);backdrop-filter:blur(10px);border-bottom:1px solid #E2EADF">
+  <nav style="max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+
+    <!-- Logo -->
+    <a href="/" style="display:flex;align-items:center;gap:10px;flex-shrink:0;text-decoration:none">
+      <div style="width:34px;height:34px;border-radius:9px;background:#2D5A3D;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <div style="width:14px;height:14px;border:2.5px solid #F4F7F2;border-radius:3px"></div>
+      </div>
+      <span style="font-weight:800;font-size:20px;color:#1A3325;letter-spacing:-0.02em;white-space:nowrap">Sharp Frame</span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <div class="sf-nav-links">
+      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">Home</a>
+      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">About Us</a>
+      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">Indoor Billboards</a>
+      <a href="#" class="sf-nav-link" style="font-weight:600;font-size:15px;color:#4A6655">Solutions</a>
+    </div>
+
+    <!-- Desktop contact button -->
+    <a href="#" class="sf-contact-btn sf-nav-contact" style="background:#C4622A;color:#fff;font-weight:700;font-size:15px;padding:12px 24px;border-radius:999px;box-shadow:0 4px 6px rgba(140,55,12,0.6);white-space:nowrap">Contact Us</a>
+
+    <!-- Hamburger -->
+    <button class="sf-hamburger" id="sf-hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="sf-mobile-menu" id="sf-mobile-menu">
+    <div class="sf-mobile-menu-inner">
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Indoor Billboards</a>
+      <a href="#">Solutions</a>
+      <a href="#" class="sf-mobile-contact">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const hamburger = document.getElementById('sf-hamburger');
+  const mobileMenu = document.getElementById('sf-mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.toggle('is-open');
+    hamburger.classList.toggle('is-open');
+    hamburger.setAttribute('aria-expanded', String(!!isOpen));
+  });
+</script>

@@ -1,0 +1,18 @@
+{
+  "eyebrow": "Our Network",
+  "heading": "We Put Local Brands on the Map",
+  "body": "Our network spans across Denver's most popular neighborhoods and venues.",
+  "openInMapsUrl": "https://maps.google.com/?q=Denver,CO",
+  "locationsHeading": "Our Locations",
+  "locationsBody": "Browse the venues in our network while exploring the map.",
+  "locations": [
+    { "name": "Aurora" },
+    { "name": "Arvada" },
+    { "name": "Lakewood" },
+    { "name": "Centennial" },
+    { "name": "Highlands Ranch" },
+    { "name": "Westminster" },
+    { "name": "Englewood" },
+    { "name": "Thornton" }
+  ]
+}

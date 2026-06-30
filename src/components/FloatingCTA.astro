@@ -1,0 +1,95 @@
+---
+// src/components/FloatingCTA.astro
+---
+
+<!-- Converted to button to perfectly handle the modal event listener -->
+<button id="open-scan-modal" class="floating-scan-btn" aria-label="Get a Free Scan">
+  <svg width="18" height="18" viewBox="0 0 24 24" class="bolt-icon" aria-hidden="true">
+    <polygon points="13,2 4,14 11,14 10,22 20,9 13,9"/>
+  </svg>
+  <span>Free Scan</span>
+</button>
+
+<style>
+  .floating-scan-btn {
+    /* Viewport Positioning */
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 100;
+    
+    /* Layout & Alignment */
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    padding: 16px 32px;
+    border-radius: 999px;
+    
+    /* Native Button Resets */
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    
+    /* Typography */
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    text-decoration: none !important;
+    
+    /* Smooth State Animations */
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    
+    /* STATE 1: Default (Terracotta Orange) */
+    background: #C4622A;
+    color: #ffffff;
+    box-shadow: 0 8px 22px rgba(196, 98, 42, 0.28);
+  }
+
+  .floating-scan-btn .bolt-icon {
+    fill: #ffffff;
+    transition: fill 0.2s ease;
+  }
+
+  /* STATE 2: Hover (White Background, Terracotta Text/Icon) */
+  @media (hover: hover) {
+    .floating-scan-btn:hover {
+      background: #ffffff;
+      color: #C4622A;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(26, 51, 37, 0.15);
+      border: 1.5px solid rgba(216, 232, 220, 0.5); /* Prevents harsh white blending */
+      padding: 14.5px 30.5px; /* Safely accounts for the 1.5px border layout width adjustment */
+    }
+    
+    .floating-scan-btn:hover .bolt-icon {
+      fill: #C4622A;
+    }
+  }
+
+  /* STATE 3: Pressed / Clicked (Forest Green) */
+  .floating-scan-btn:active {
+    background: #2D5A3D !important;
+    color: #ffffff !important;
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(45, 90, 61, 0.3) !important;
+    border-color: transparent !important;
+    padding: 16px 32px !important;
+  }
+
+  .floating-scan-btn:active .bolt-icon {
+    fill: #ffffff !important;
+  }
+</style>
+
+<script>
+  // Clean, scoped Astro script to open your native HTML dialog
+  const openBtn = document.getElementById('open-scan-modal');
+  const modal = document.getElementById('scan-modal') as HTMLDialogElement | null;
+
+  if (openBtn && modal) {
+    openBtn.addEventListener('click', () => {
+      modal.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+  }
+</script>

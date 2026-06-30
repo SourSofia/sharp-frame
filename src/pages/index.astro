@@ -1,17 +1,108 @@
 ---
+import services from '../data/services.json';
+import venue from '../data/venue.json';
+import fullservice from '../data/fullservice.json';
+import faq from '../data/faq.json';
 
+import '../styles/global.css';
+
+// Component Imports
+import Navbar from '../components/NavBar.astro';
+import Hero from '../components/HeroSection.astro';
+import Services from '../components/ServicesSection.astro';
+import VenuePartner from '../components/VenueSection.astro';
+import FullService from '../components/FullServiceSection.astro';
+import WhyChooseUs from '../components/WhyUsSection.astro';
+import Faq from '../components/FaqSection.astro';
+import MapSection from '../components/MapSection.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Footer from '../components/Footer.astro';
+import FloatingCTA from '../components/FloatingCTA.astro';
+import ScanModal from '../components/ScanModal.astro';
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sharp Frame | Denver Local Advertising</title>
+  <meta name="description" content="Local advertising and digital marketing pros in Denver.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F4F7F2; color: #4A6655; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+  </style>
+</head>
+<body>
+
+<div style="background:#F4F7F2;min-height:100%">
+
+  <Navbar />
+
+  <Hero />
+
+  <Services items={services.items} />
+
+  <VenuePartner 
+    heading={venue.heading} 
+    body={venue.body} 
+    bullets={venue.bullets} 
+    cta={venue.cta} 
+  />
+
+  <FullService 
+    eyebrow={fullservice.eyebrow}
+    heading={fullservice.heading}
+    body={fullservice.body}
+    cta={fullservice.cta}
+    items={fullservice.items}
+  />
+
+  <WhyChooseUs />
+
+  <Faq items={faq.items} />
+
+  <MapSection />
+
+  <CtaBanner />
+
+  <Footer />
+
+  <FloatingCTA />
+  <ScanModal />
+
+</div>
+
+<script>
+    // Wire up the modal closing listeners once here
+    const modal = document.getElementById('scan-modal') as HTMLDialogElement | null;
+    const closeX = document.getElementById('close-modal-x');
+    const closeLink = document.getElementById('close-modal-link');
+
+    const handleClose = () => modal?.close();
+
+    closeX?.addEventListener('click', handleClose);
+    closeLink?.addEventListener('click', handleClose);
+    modal?.addEventListener('close', () => { document.body.style.overflow = ''; });
+
+    if (modal && !sessionStorage.getItem('scanModalSeen')) {
+      setTimeout(() => {
+        if (!modal.open) {
+          modal.showModal();
+          document.body.style.overflow = 'hidden';
+        }
+        sessionStorage.setItem('scanModalSeen', '1');
+      }, 3000);
+    }
+  </script>
+
+
+
+
+</body>
+
 </html>

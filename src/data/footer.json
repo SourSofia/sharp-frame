@@ -1,0 +1,62 @@
+{
+  "logo": "Sharp Frame",
+  "tagline": "Your trusted partner for comprehensive digital marketing solutions, from custom website design and SEO to indoor billboard advertising and targeted campaigns that deliver real results.",
+  "socials": [
+    { "platform": "LinkedIn", "href": "https://www.linkedin.com/company/your-company/" },
+    { "platform": "Facebook", "href": "https://www.facebook.com/yourcompany/" },
+    { "platform": "Instagram", "href": "https://www.instagram.com/yourcompany/" },
+    { "platform": "YouTube", "href": "https://www.youtube.com/@yourcompany" }
+  ],
+  "solutionsGroups": [
+    {
+      "heading": "Foundational",
+      "links": [
+        { "label": "Website Design", "href": "/solutions/foundational/website-design" },
+        { "label": "Google Business Profile", "href": "/solutions/foundational/google-business-profile" },
+        { "label": "Social Media Management", "href": "/solutions/foundational/social-media-management" },
+        { "label": "Design Services", "href": "/solutions/foundational/design-services" }
+      ]
+    },
+    {
+      "heading": "Lead Generation",
+      "links": [
+        { "label": "Social Media Advertising", "href": "/solutions/lead-gen/social-media-advertising" },
+        { "label": "Pay Per Click", "href": "/solutions/lead-gen/pay-per-click" }
+      ]
+    },
+    {
+      "heading": "Branding & Awareness",
+      "links": [
+        { "label": "Connected TV (OTT Ads)", "href": "/solutions/branding-awareness/connected-tv" },
+        { "label": "Display (Geofencing)", "href": "/solutions/branding-awareness/display-geofencing" },
+        { "label": "Streaming Audio", "href": "/solutions/branding-awareness/streaming-audio" }
+      ]
+    }
+  ],
+  "indoorBillboards": {
+    "heading": "Indoor Billboards",
+    "links": [
+      { "label": "Become a Venue Partner", "href": "/indoor-billboards/become-a-venue-partner" },
+      { "label": "Locations", "href": "/indoor-billboards/locations" },
+      { "label": "Screen Advertising", "href": "/indoor-billboards/screen-advertising" }
+    ]
+  },
+  "company": {
+    "heading": "Company",
+    "links": [
+      { "label": "About", "href": "/about-us" },
+      { "label": "Contact", "href": "/contact-us" }
+    ]
+  },
+  "contact": {
+    "heading": "Contact Us",
+    "city": "Denver, CO",
+    "phone": "(555) 123-4567",
+    "email": "info@sharpframe.com"
+  },
+  "legal": [
+    { "label": "Terms", "href": "/terms" },
+    { "label": "Privacy Policy", "href": "/privacy" }
+  ],
+  "copyright": "© Sharp Frame. All rights reserved."
+}

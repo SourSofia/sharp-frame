@@ -1,0 +1,186 @@
+---
+interface Props {
+  heading: string;
+  body: string;
+  bullets: string[];
+  cta: { href: string };
+}
+const { heading, body, bullets, cta } = Astro.props;
+---
+<section style="max-width:1200px;margin:0 auto;padding:96px 40px">
+  <div class="venue-grid">
+    <div class="venue-img-wrap venue-from-left">
+      <img
+        src="/images/venue-partner-mobile.avif"
+        alt="Venue partner indoor screen"
+        class="venue-img"
+      />
+    </div>
+    <div class="venue-card venue-from-right">
+      <div class="venue-eyebrow">Venue Network</div>
+      <h2 class="venue-heading">{heading}</h2>
+      <p class="venue-body">{body}</p>
+      <div class="venue-bullets">
+        {bullets.map((b) => (
+          <div class="venue-bullet">
+            <div style="width:22px;height:22px;border-radius:999px;background:#2D5A3D;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <div style="width:7px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)"></div>
+            </div>
+            <span class="venue-bullet-text">{b}</span>
+          </div>
+        ))}
+      </div>
+      <div style="text-align:center">
+        <a href={cta.href} class="venue-cta-btn">View venue partners</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .venue-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 48px;
+    align-items: stretch;
+  }
+
+  .venue-img-wrap {
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 480px;
+  }
+
+  .venue-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    min-height: 480px;
+  }
+
+  /* ── Card ── */
+  .venue-card {
+    background: #fff;
+    border: 1px solid #D8E8DC;
+    border-radius: 20px;
+    padding: 48px;
+  }
+  .venue-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #C4622A;
+    margin-bottom: 16px;
+  }
+  .venue-heading {
+    font-size: 36px;
+    line-height: 1.12;
+    font-weight: 800;
+    color: #1A3325;
+    letter-spacing: -0.02em;
+  }
+  .venue-body {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #4A6655;
+    margin-top: 18px;
+  }
+  .venue-bullets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 30px;
+  }
+  .venue-bullet {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #F4F7F2;
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .venue-bullet-text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #1A3325;
+  }
+  .venue-cta-btn {
+    display: inline-block;
+    margin-top: 32px;
+    background: #C4622A;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 30px;
+    border-radius: 999px;
+    box-shadow: 0 4px 6px rgba(140,55,12,0.6);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  .venue-cta-btn:hover {
+    transform: scale(1.06);
+    background: #d8733d !important;
+  }
+
+  /* ── Float-in animations ── */
+  .venue-from-left,
+  .venue-from-right {
+    transition:
+      opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .venue-from-left  { opacity: 0; transform: translateX(-52px); }
+  .venue-from-right { opacity: 0; transform: translateX(52px); }
+
+  .venue-from-left.in-view,
+  .venue-from-right.in-view {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .venue-from-right.in-view { transition-delay: 120ms; }
+
+  /* ── Tablet (max 768px) ── */
+  @media (max-width: 768px) {
+    .venue-grid        { grid-template-columns: 1fr; gap: 24px; }
+    .venue-img-wrap    { min-height: 280px; }
+    .venue-img         { min-height: 280px; height: 280px; }
+    .venue-card        { padding: 32px 28px; }
+    .venue-eyebrow     { font-size: 11px; margin-bottom: 12px; }
+    .venue-heading     { font-size: 26px; }
+    .venue-body        { font-size: 14px; margin-top: 14px; }
+    .venue-bullet      { padding: 12px 14px; }
+    .venue-bullet-text { font-size: 13px; }
+    .venue-cta-btn     { font-size: 14px; padding: 13px 24px; margin-top: 24px; }
+  }
+
+  /* ── Mobile (max 479px) ── */
+
+  @media (max-width: 479px) {
+    .venue-card        { padding: 24px 20px; }
+    .venue-heading     { font-size: 22px; }
+    .venue-body        { font-size: 13px; }
+    .venue-bullets     { grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
+    .venue-bullet-text { font-size: 12.5px; }
+    .venue-cta-btn     { font-size: 14px; width: 100%; text-align: center; }
+  }
+</style>
+
+<script>
+  const els = document.querySelectorAll('.venue-from-left, .venue-from-right');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    },
+    { rootMargin: '0px 0px -18% 0px', threshold: 0 }
+  );
+
+  els.forEach((el) => observer.observe(el));
+</script>

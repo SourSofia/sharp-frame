@@ -1,0 +1,30 @@
+{
+  "heading": "Local Advertising Solutions for Denver Businesses",
+  "body": "As your trusted Denver marketing pros, our billboard network gives you access to high-traffic locations where your ideal customers spend time. From gyms and restaurants to retail stores and office buildings, we help you get noticed in the moments that matter.",
+  "items": [
+    {
+      "title": "Indoor Billboard Advertising",
+      "description": "High-impact advertising in premium indoor locations across Denver",
+      "href": "/indoor-billboards/screen-advertising"
+    },
+    {
+      "title": "Social Media Marketing",
+      "description": "Build and engage your audience with strategic social media content",
+      "href": "/solutions/foundational/social-media-management"
+    },
+    {
+      "title": "Custom Website Design",
+      "description": "Professional websites that convert visitors into customers",
+      "href": "/solutions/foundational/website-design"
+    },
+    {
+      "title": "Targeted Lead Generation",
+      "description": "Strategic campaigns that generate quality leads and maximize exposure",
+      "href": "/solutions/lead-gen/pay-per-click"
+    }
+  ],
+  "cta": {
+    "label": "Explore Our Digital Marketing Services",
+    "href": "/solutions"
+  }
+}

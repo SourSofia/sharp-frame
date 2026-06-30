@@ -1,0 +1,103 @@
+---
+// Static section matching your layout specs
+---
+<section class="wu-section" style="max-width:1200px;margin:0 auto;">
+  <div style="position:relative;border-radius:24px;overflow:hidden">
+    <img
+      src="/images/marketing-partners.avif"
+      alt="Denver marketing partners"
+      class="wu-img"
+      style="width:100%;object-fit:cover;display:block;"
+    />
+    <div class="wu-card" style="position:absolute;background:rgba(255,255,255,0.96);backdrop-filter:blur(6px);border-radius:20px;display:grid;align-items:center;box-shadow:0 24px 60px rgba(26,51,37,0.18)">
+      <div>
+        <div class="wu-eyebrow">Your Trusted Denver Marketing Partners</div>
+        <h2 class="wu-heading">Why Denver Businesses Choose Our Marketing Pros</h2>
+        <a href="/contact-us" class="whyus-cta-btn">Get started today</a>
+      </div>
+      <p class="wu-body">We're not just another agency. We're Denver marketing pros and locals who understand the market, know the neighborhoods, and have the relationships that get results. Our clients choose us because we deliver measurable outcomes, transparent reporting, and personalized service that treats your business like our own. From web design to PPC campaigns, we've got you covered.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Desktop (base) ── */
+  .wu-section  { padding: 96px 40px; }
+  .wu-img      { height: 560px; }
+  .wu-card     { left: 40px; right: 40px; bottom: 40px; padding: 44px; gap: 40px; grid-template-columns: 1fr 1fr; }
+
+  /* ── Float-up animation ── */
+  .wu-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+      opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .wu-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .wu-eyebrow  { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #C4622A; margin-bottom: 14px; }
+  .wu-heading  { font-size: 36px; line-height: 1.1; font-weight: 800; color: #1A3325; letter-spacing: -0.02em; }
+  .wu-body     { font-size: 16px; line-height: 1.7; color: #4A6655; }
+
+  .whyus-cta-btn {
+    display: inline-block;
+    margin-top: 26px;
+    background: #C4622A;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 30px;
+    border-radius: 999px;
+    box-shadow: 0 4px 6px rgba(140,55,12,0.6);
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  .whyus-cta-btn:hover {
+    transform: scale(1.06);
+    background: #d8733d !important;
+  }
+
+  /* ── Tablet (max 768px) ── */
+  @media (max-width: 768px) {
+    .wu-section { padding: 48px 20px; }
+    .wu-img     { height: 520px; }
+    .wu-card    { left: 16px; right: 16px; bottom: 16px; padding: 28px 24px; gap: 16px; grid-template-columns: 1fr; }
+    .wu-eyebrow { font-size: 10px; margin-bottom: 10px; }
+    .wu-heading { font-size: 22px; }
+    .wu-body    { font-size: 13.5px; line-height: 1.6; }
+    .whyus-cta-btn { font-size: 14px; padding: 12px 22px; margin-top: 18px; }
+  }
+
+  /* ── Mobile (max 479px) ── */
+  @media (max-width: 479px) {
+    .wu-section { padding: 32px 16px; }
+    .wu-img     { height: 580px; }
+    .wu-card    { left: 12px; right: 12px; bottom: 12px; padding: 20px 16px; gap: 12px; }
+    .wu-eyebrow { font-size: 9px; }
+    .wu-heading { font-size: 18px; }
+    .wu-body    { font-size: 12.5px; }
+    .whyus-cta-btn { font-size: 13px; padding: 11px 20px; width: 100%; text-align: center; }
+  }
+</style>
+
+<script>
+  const card = document.querySelector('.wu-card');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    },
+    { rootMargin: '0px 0px -18% 0px', threshold: 0 }
+  );
+
+  if (card) observer.observe(card);
+</script>

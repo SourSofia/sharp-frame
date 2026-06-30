@@ -1,0 +1,272 @@
+---
+import data from '../data/footer.json';
+const { logo, tagline, socials, solutionsGroups, indoorBillboards, company, contact, legal, copyright } = data;
+
+const socialIcons: Record<string, string> = {
+  LinkedIn:  `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+  Facebook:  `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+  Instagram: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+  YouTube:   `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>`,
+};
+---
+
+<footer class="ft-root">
+
+  <!-- ── White top band (full-bleed) ── -->
+  <div class="ft-top-band">
+    <div class="ft-inner">
+      <div class="ft-top">
+        <div class="ft-brand">
+          <div class="ft-logo-row">
+            <div class="ft-logo-icon">
+              <div class="ft-logo-sq"></div>
+            </div>
+            <span class="ft-logo-name">{logo}</span>
+          </div>
+          <p class="ft-tagline">{tagline}</p>
+        </div>
+
+        <div class="ft-socials-block">
+          <span class="ft-socials-label">Connect With Us</span>
+          <div class="ft-socials">
+            {socials.map((s) => (
+              <a
+                href={s.href}
+                class="ft-social-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.platform}
+                set:html={socialIcons[s.platform] ?? ''}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Green section ── -->
+  <div class="ft-inner">
+
+    <div class="ft-divider"></div>
+
+    <!-- ── Columns ── -->
+    <div class="ft-cols">
+
+      <div class="ft-solutions">
+        <div class="ft-solutions-heading">
+          Solutions
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="ft-accordion">
+          {solutionsGroups.map((grp, i) => (
+            <div class="ft-acc-item">
+              <button class={`ft-acc-trigger${i === 0 ? ' is-open' : ''}`} aria-expanded={i === 0 ? 'true' : 'false'}>
+                <span>{grp.heading}</span>
+                <svg class="ft-acc-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="18 15 12 9 6 15"/>
+                </svg>
+              </button>
+              <div class="ft-acc-body">
+                <div class="ft-acc-inner">
+                  {grp.links.map((link) => (
+                    <a href={link.href} class="ft-link">{link.label}</a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4 class="ft-col-heading">{indoorBillboards.heading}</h4>
+        <div class="ft-col-links">
+          {indoorBillboards.links.map((link) => (
+            <a href={link.href} class="ft-link">{link.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4 class="ft-col-heading">{company.heading}</h4>
+        <div class="ft-col-links">
+          {company.links.map((link) => (
+            <a href={link.href} class="ft-link">{link.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4 class="ft-col-heading">{contact.heading}</h4>
+        <div class="ft-contact-list">
+          <div class="ft-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9fc0a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>{contact.city}</span>
+          </div>
+          <div class="ft-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9fc0a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>{contact.phone}</span>
+          </div>
+          <div class="ft-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9fc0a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>{contact.email}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ft-divider"></div>
+
+    <!-- ── Bottom bar ── -->
+    <div class="ft-bottom">
+      <div class="ft-legal">
+        {legal.map((item, i) => (
+          <>
+            <a href={item.href} class="ft-legal-link">{item.label}</a>
+            {i < legal.length - 1 && <span class="ft-legal-sep">|</span>}
+          </>
+        ))}
+      </div>
+      <span class="ft-copyright">{copyright}</span>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.ft-acc-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      btn.classList.toggle('is-open', !expanded);
+    });
+  });
+</script>
+
+<style>
+  /* ── Root ── */
+  .ft-root    { background: #2D5A3D; }
+  .ft-inner   { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+  /* ── White top band ── */
+  .ft-top-band { background: #fff; padding: 48px 0; }
+  .ft-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .ft-brand     { max-width: 460px; }
+  .ft-logo-row  { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .ft-logo-icon {
+    width: 36px; height: 36px; border-radius: 10px; background: #FBEDE4;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ft-logo-sq   { width: 14px; height: 14px; border: 2.5px solid #C4622A; border-radius: 3px; }
+  .ft-logo-name { font-weight: 800; font-size: 20px; color: #C4622A; letter-spacing: -0.02em; }
+  .ft-tagline   { font-size: 14.5px; line-height: 1.65; color: #4A6655; }
+
+  /* ── Socials ── */
+  .ft-socials-block { flex-shrink: 0; text-align: right; }
+  .ft-socials-label {
+    display: block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.13em;
+    text-transform: uppercase; color: #C4622A; margin-bottom: 12px;
+  }
+  .ft-socials { display: flex; gap: 8px; justify-content: flex-end; }
+  .ft-social-btn {
+    width: 40px; height: 40px; border-radius: 10px;
+    border: 1px solid rgba(196,98,42,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: #C4622A; text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .ft-social-btn:hover { background: #C4622A; color: #fff; border-color: #C4622A; }
+
+  /* ── Divider ── */
+  .ft-divider { height: 1px; background: rgba(255,255,255,0.12); margin: 40px 0; }
+
+  /* ── Columns grid ── */
+  .ft-cols {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 0.7fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ── Simple column ── */
+  .ft-col-heading {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #9fc0a8; margin-bottom: 20px;
+  }
+  .ft-col-links { display: flex; flex-direction: column; gap: 13px; }
+  .ft-link { font-size: 14.5px; color: #e4eee6; text-decoration: none; transition: color 0.2s ease; }
+  .ft-link:hover { color: #fff; }
+
+  /* ── Solutions accordion ── */
+  .ft-solutions-heading {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #9fc0a8; margin-bottom: 16px;
+  }
+  .ft-accordion { display: flex; flex-direction: column; }
+  .ft-acc-item { border-top: 1px solid rgba(255,255,255,0.1); }
+  .ft-acc-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .ft-acc-trigger {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 0; background: none; border: none; cursor: pointer;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #cfe0d3; transition: color 0.2s ease;
+  }
+  .ft-acc-trigger:hover { color: #fff; }
+  .ft-acc-icon { transition: transform 0.3s ease; flex-shrink: 0; }
+  .ft-acc-trigger[aria-expanded="false"] .ft-acc-icon { transform: rotate(180deg); }
+  .ft-acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+  .ft-acc-trigger[aria-expanded="true"] + .ft-acc-body { grid-template-rows: 1fr; }
+  .ft-acc-inner { overflow: hidden; }
+  .ft-acc-inner .ft-link { display: block; padding: 5px 0 5px 2px; font-size: 14px; }
+  .ft-acc-inner .ft-link:first-child { padding-top: 8px; }
+  .ft-acc-inner .ft-link:last-child  { padding-bottom: 14px; }
+
+  /* ── Contact list ── */
+  .ft-contact-list { display: flex; flex-direction: column; gap: 14px; }
+  .ft-contact-item { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: #e4eee6; }
+  .ft-contact-item svg { flex-shrink: 0; }
+
+  /* ── Bottom bar ── */
+  .ft-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding-bottom: 36px; }
+  .ft-legal { display: flex; align-items: center; gap: 12px; }
+  .ft-legal-link { font-size: 14px; color: #cfe0d3; text-decoration: none; transition: color 0.2s ease; }
+  .ft-legal-link:hover { color: #fff; }
+  .ft-legal-sep { color: rgba(255,255,255,0.3); font-size: 14px; }
+  .ft-copyright { font-size: 14px; color: #9fc0a8; }
+
+  /* ── Tablet (max 768px) ── */
+  @media (max-width: 768px) {
+    .ft-top-band  { padding: 36px 0; }
+    .ft-inner     { padding: 0 24px; }
+    .ft-top       { flex-direction: column; gap: 24px; }
+    .ft-socials-block { text-align: left; }
+    .ft-socials   { justify-content: flex-start; }
+    .ft-cols      { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .ft-solutions { grid-column: 1 / -1; }
+    .ft-tagline   { font-size: 13.5px; }
+    .ft-bottom    { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  /* ── Mobile (max 479px) ── */
+  @media (max-width: 479px) {
+    .ft-inner     { padding: 0 16px; }
+    .ft-top-band  { padding: 28px 0; }
+    .ft-cols      { grid-template-columns: 1fr; gap: 24px; }
+    .ft-solutions { grid-column: auto; }
+    .ft-logo-name { font-size: 18px; }
+    .ft-tagline   { font-size: 13px; }
+    .ft-link      { font-size: 14px; }
+    .ft-contact-item { font-size: 13.5px; }
+    .ft-copyright { font-size: 13px; }
+    .ft-legal-link { font-size: 13px; }
+  }
+</style>

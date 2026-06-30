@@ -1,0 +1,343 @@
+---
+// src/components/ScanModal.astro
+const perks = [
+  'Free 30-minute strategy session',
+  'Custom campaign recommendations',
+  'No commitment or pressure',
+];
+---
+
+<dialog id="scan-modal" class="modal-backdrop">
+  <div class="modal-container">
+    
+    <!-- ===== LEFT PANEL ===== -->
+    <div class="left-panel">
+      <div class="brand-row">
+        <div class="brand-logo">
+          <div class="inner-box"></div>
+        </div>
+        <span class="brand-name">Sharp Frame</span>
+      </div>
+
+      <div class="tagline">Limited Time Offer</div>
+      <h2 class="modal-title">Free Marketing Consultation</h2>
+
+      <div class="perks-list">
+        {perks.map((perk) => (
+          <div class="perk-card">
+            <div class="check-circle">
+              <div class="checkmark"></div>
+            </div>
+            <span class="perk-text">{perk}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="badge-row">
+        <span class="pill-badge">20+ Years</span>
+        <span class="pill-badge">Denver Experts</span>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT PANEL ===== -->
+    <div class="right-panel">
+      <div class="skyline-placeholder">
+        <img src="/images/home.avif" alt="Denver skyline" class="skyline-img" />
+      </div>
+
+      <h3 class="cta-heading">Ready to Grow Your Business?</h3>
+      <p class="cta-description">Expert marketing strategies tailored for Denver businesses. Let's discuss how we can help you succeed.</p>
+
+      <div class="action-footer">
+        <a href="/schedule" class="primary-btn">Schedule Free Consultation</a>
+        <div class="dismiss-wrapper">
+          <button type="button" id="close-modal-link" class="dismiss-btn">No, thanks</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CLOSE BUTTON ===== -->
+    <button type="button" id="close-modal-x" class="close-x" aria-label="Close">&times;</button>
+
+  </div>
+</dialog>
+
+<style>
+  /* --- Float-up entrance animation --- */
+  @keyframes modalFloatUp {
+    from {
+      opacity: 0;
+      transform: translateY(48px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  dialog[open] .modal-container {
+    animation: modalFloatUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* --- Native Dialog Reset & Overlay --- */
+  .modal-backdrop {
+    border: none;
+    background: transparent;
+    max-width: 100vw;
+    max-height: 100vh;
+    padding: 0;
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .modal-backdrop::backdrop {
+    background: rgba(20, 32, 25, 0.55);
+    backdrop-filter: blur(3px);
+  }
+
+  /* --- Container Layout --- */
+  .modal-container {
+    position: relative;
+    width: 1040px;
+    max-width: calc(100vw - 48px);
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    box-shadow: 0 40px 90px rgba(20, 32, 25, 0.45);
+  }
+
+  @media (max-width: 768px) {
+    .modal-container {
+      grid-template-columns: 1fr;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+    }
+  }
+
+  /* --- Left Panel --- */
+  .left-panel {
+    background: #F4F7F2;
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .brand-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #2D5A3D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inner-box {
+    width: 14px;
+    height: 14px;
+    border: 2.5px solid #F4F7F2;
+    border-radius: 3px;
+  }
+
+  .brand-name {
+    font-weight: 800;
+    font-size: 20px;
+    color: #1A3325;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #C4622A;
+    margin-bottom: 14px;
+  }
+
+  .modal-title {
+    font-size: 42px;
+    line-height: 1.06;
+    font-weight: 800;
+    color: #1A3325;
+    letter-spacing: -0.02em;
+  }
+
+  .perks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .perk-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid #D8E8DC;
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+
+  .check-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #2D5A3D;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checkmark {
+    width: 7px;
+    height: 12px;
+    border: solid #ffffff;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+
+  .perk-text {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #1A3325;
+  }
+
+  .badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 32px;
+  }
+
+  .pill-badge {
+    background: #2D5A3D;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    padding: 9px 16px;
+    border-radius: 999px;
+  }
+
+  /* --- Right Panel --- */
+  .right-panel {
+    background: #2D5A3D;
+    padding: 44px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skyline-placeholder {
+    border-radius: 18px;
+    overflow: hidden;
+    height: 210px;
+  }
+
+  .skyline-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cta-heading {
+    font-size: 34px;
+    line-height: 1.08;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    margin-top: 28px;
+  }
+
+  .cta-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #cfe0d3;
+    margin-top: 14px;
+  }
+
+  .action-footer {
+    margin-top: auto;
+    padding-top: 32px;
+  }
+
+  .primary-btn {
+    display: block;
+    text-align: center;
+    background: #C4622A;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 17px 24px;
+    border-radius: 999px;
+    text-decoration: none !important;
+    box-shadow: 0 10px 26px rgba(196, 98, 42, 0.32);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .primary-btn:hover {
+    transform: scale(1.02);
+    background: #d86f33;
+  }
+
+  .dismiss-wrapper {
+    text-align: center;
+    margin-top: 18px;
+  }
+
+  .dismiss-btn {
+    background: none;
+    border: none;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #9fc0a8;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(159, 192, 168, 0.5);
+    padding-bottom: 1px;
+    font-family: inherit;
+  }
+
+  .dismiss-btn:hover {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+  }
+
+  /* --- Interactive Close 'X' --- */
+  .close-x {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-family: inherit;
+    transition: background-color 0.2s ease;
+  }
+
+  .close-x:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+</style>

@@ -1,0 +1,31 @@
+{
+  "eyebrow": "Featured",
+  "heading": "Full-Service Digital Marketing from Denver Pros",
+  "body": "Beyond screen ads, our Denver marketing pros provide full-scale digital marketing to help your business show up, stand out, and grow. Whether you're just getting started or need help scaling your outreach, we've got the tools and the team to support you.",
+  "items": [
+    {
+      "title": "Google Business Profile Setup",
+      "description": "Get found on Google Maps and local search.",
+      "href": "/solutions/foundational/google-business"
+    },
+    {
+      "title": "Professional Website Design",
+      "description": "Fast, mobile-ready websites built for performance.",
+      "href": "/solutions/foundational/website-design"
+    },
+    {
+      "title": "Social Media Strategy",
+      "description": "Consistent posting and creative to grow your presence.",
+      "href": "/solutions/foundational/social-media-management"
+    },
+    {
+      "title": "PPC Campaign Management",
+      "description": "Targeted ads that drive calls, clicks, and leads.",
+      "href": "/solutions/lead-gen/pay-per-click"
+    }
+  ],
+  "cta": {
+    "label": "View All Marketing Solutions",
+    "href": "/solutions"
+  }
+}

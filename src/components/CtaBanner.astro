@@ -1,0 +1,112 @@
+---
+// Static section matching your layout specs
+---
+<section class="ctab-section">
+  <div class="ctab-bg-photo"></div>
+  <div class="ctab-bg-overlay"></div>
+  <div class="ctab-inner ctab-animate" style="max-width:1200px;margin:0 auto;background:#C4622A;text-align:center;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-60px;right:-40px;width:240px;height:240px;border-radius:999px;background:rgba(255,255,255,0.07)"></div>
+    <div style="position:absolute;bottom:-80px;left:-50px;width:260px;height:260px;border-radius:999px;background:rgba(255,255,255,0.06)"></div>
+    <div style="position:relative">
+      <h2 class="ctab-heading">Ready to Grow Your Business?</h2>
+      <p class="ctab-body">Get in touch with our team today and let's discuss how we can help you reach more customers.</p>
+      <a href="/contact-us" class="cta-banner-btn ctab-btn">Schedule Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Desktop (base) ── */
+  .ctab-section  { padding: 80px 40px; position: relative; overflow: hidden; }
+
+  .ctab-bg-photo {
+    position: absolute;
+    inset: 0;
+    background: url('/images/home 2.png') center center / cover no-repeat;
+    z-index: 0;
+  }
+  .ctab-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: url('/images/Rectangle 43.png') center center / cover no-repeat;
+    z-index: 1;
+  }
+  .ctab-inner { position: relative; z-index: 2; }
+  .ctab-inner    { border-radius: 28px; padding: 80px 48px; border: 2px solid rgba(255,255,255,0.5); }
+  .ctab-heading  { font-size: 46px; line-height: 1.08; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+  .ctab-body     { font-size: 18px; line-height: 1.6; color: #fbe7da; margin: 20px auto 0; max-width: 600px; }
+  .ctab-btn      {
+    display: inline-block;
+    margin-top: 32px;
+    background: #fff;
+    color: #C4622A;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 18px 38px;
+    border-radius: 999px;
+    box-shadow: 0 4px 6px rgba(140,55,12,0.6);
+    text-decoration: none;
+  }
+
+  /* ── Tablet (max 768px) ── */
+  @media (max-width: 768px) {
+    .ctab-section { padding: 0 20px 64px; }
+    .ctab-inner   { border-radius: 20px; padding: 56px 32px; }
+    .ctab-heading { font-size: 32px; }
+    .ctab-body    { font-size: 15px; margin-top: 16px; }
+    .ctab-btn     { font-size: 15px; padding: 15px 28px; margin-top: 24px; }
+  }
+
+  /* ── Mobile (max 479px) ── */
+  @media (max-width: 479px) {
+    .ctab-section { padding: 0 16px 48px; }
+    .ctab-inner   { border-radius: 16px; padding: 40px 24px; }
+    .ctab-heading { font-size: 26px; }
+    .ctab-body    { font-size: 14px; margin-top: 12px; }
+    .ctab-btn     { font-size: 14px; padding: 14px 24px; margin-top: 20px; width: 100%; }
+  }
+
+  /* ── Float-up animation ── */
+  .ctab-animate {
+    opacity: 0;
+    transform: translateY(48px);
+    transition:
+      opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ctab-animate.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Hover ── */
+  .cta-banner-btn {
+    border: 2px solid transparent;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .cta-banner-btn:hover {
+    transform: scale(1.06);
+    background: #C4622A !important;
+    color: #fff !important;
+    border-color: #fff;
+  }
+</style>
+
+<script>
+  const ctabCard = document.querySelector('.ctab-animate');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    },
+    { rootMargin: '0px 0px -18% 0px', threshold: 0 }
+  );
+
+  if (ctabCard) observer.observe(ctabCard);
+</script>

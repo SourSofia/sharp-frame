@@ -1,0 +1,37 @@
+{
+  "logo": "Sharp Frame",
+  "links": [
+    { "label": "Home", "href": "/" },
+    { "label": "About Us", "href": "/about-us" },
+    {
+      "label": "Indoor Billboards",
+      "dropdown": [
+        { "label": "Become a Venue Partner", "description": "Join our network of premium venues to reach engaged audiences.", "href": "/indoor-billboards/become-a-venue-partner" },
+        { "label": "Locations", "description": "Our network of indoor digital billboards is located within retail spaces.", "href": "/indoor-billboards/locations" },
+        { "label": "Screen Advertising", "description": "Advertise on screens in your local community to reach your audience.", "href": "/indoor-billboards/screen-advertising" }
+      ]
+    },
+    {
+      "label": "Solutions",
+      "href": "/solutions",
+      "dropdown": [
+        { "category": "Foundational", "items": [
+          { "label": "Website Design", "href": "/solutions/foundational/website-design" },
+          { "label": "Google Business Profile", "href": "/solutions/foundational/google-business-profile" },
+          { "label": "Social Media Management", "href": "/solutions/foundational/social-media-management" },
+          { "label": "Design Services", "href": "/solutions/foundational/design-services" }
+        ]},
+        { "category": "Lead Gen", "items": [
+          { "label": "Social Media Advertising", "href": "/solutions/lead-gen/social-media-advertising" },
+          { "label": "Pay Per Click", "href": "/solutions/lead-gen/pay-per-click" }
+        ]},
+        { "category": "Branding & Awareness", "items": [
+          { "label": "Connected TV (OTT Ads)", "href": "/solutions/branding-awareness/connected-tv" },
+          { "label": "Display (Geofencing)", "href": "/solutions/branding-awareness/display-geofencing" },
+          { "label": "Streaming Audio Advertising", "href": "/solutions/branding-awareness/streaming-audio" }
+        ]}
+      ]
+    },
+    { "label": "Contact Us", "href": "/contact-us" }
+  ]
+}

@@ -1,0 +1,38 @@
+/* src/styles/global.css */
+:root {
+  --color-bg:       #F4F7F2;
+  --color-card:     #FFFFFF;
+  --color-forest:   #2D5A3D;
+  --color-forest-light: #EBF1E9;
+  --color-terra:    #C4622A;
+  --color-terra-light: #FBEDE4;
+  --color-heading:  #1A3325;
+  --color-body:     #4A6655;
+  --color-border:   #D8E8DC;
+  
+
+  --radius-card:    16px;
+  --radius-btn:     999px;
+  --radius-icon:    10px;
+
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* src/styles/global.css */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body { 
+  font-family: 'Plus Jakarta Sans', sans-serif; 
+  background: #F4F7F2; 
+  color: #4A6655; 
+  -webkit-font-smoothing: antialiased; 
+}
+
+a, a * { 
+  text-decoration: none !important; 
+  color: inherit; 
+}
